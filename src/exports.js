@@ -1,4 +1,6 @@
 const { gql } = require('graphql-request')
+const BrainlyError = require('./error')
+const randomUserAgent = require('random-useragent')
 
 const graphql = gql`
 query SearchQuery($query: String!, $len: Int!) {
@@ -63,16 +65,21 @@ query SearchQuery($query: String!, $len: Int!) {
 }`
 
 const site = {
-    "code": "ph",
-    "url": "https://brainly.ph"
+    code: "ph",
+    url: "https://brainly.ph"
 }
 
 const isBlank = (str) => {
     if (str === "" || str === undefined) {
-        throw ("Query cannot be blank")
+        throw new BrainlyError("Query cannot be blank")
     }
 }
 
-module.exports = graphql
-module.exports = site
-module.exports = isBlank
+const random = () => {
+    return randomUserAgent.getRandom()
+}
+
+exports.site = site
+exports.isBlank = isBlank
+exports.graph = graphql
+exports.random = random
