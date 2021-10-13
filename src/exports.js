@@ -1,4 +1,7 @@
-const graphql = `query SearchQuery($query: String!, $len: Int!) {
+const { gql } = require('graphql-request')
+
+const graphql = gql`
+query SearchQuery($query: String!, $len: Int!) {
     questionSearch(query: $query, first: $len, after: null) {
         count
         edges {
@@ -59,7 +62,10 @@ const graphql = `query SearchQuery($query: String!, $len: Int!) {
     }
 }`
 
-const site = ["ph", "https://brainly.ph", "brainly.ph"]
+const site = {
+    "code": "ph",
+    "url": "https://brainly.ph"
+}
 
 const isBlank = (str) => {
     if (str === "" || str === undefined) {
