@@ -3,5 +3,4 @@ module.exports = class BrainlyError extends Error {
         super(message)
         this.name = "BrainlyError"
     }
-    
 }
